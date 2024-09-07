@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+    <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <title>Embla Carousel Generator Vanilla</title>
+  </head>
+
+  <body>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+      html {
+        -webkit-text-size-adjust: 100%;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        box-sizing: border-box;
+        line-height: 1.15;
+        background-color: black;
+        font-size: 62.5%;
+        font-family: Inter, "system-ui", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+          "Segoe UI Emoji", "Segoe UI Symbol";
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+      body {
+        background-color: var(--background-site);
+        color: var(--text-high-contrast);
+        font-size: 1.6rem;
+        line-height: 1.65;
+      }
+      .embla {
+        min-width: 90vw;
+        height: 95vh;
+        margin: auto;
+        --slide-height: 90vh;
+        --slide-spacing: 3rem;
+        --slide-size: 100%;
+      }
+      .embla__viewport {
+        overflow: hidden;
+      }
+
+      .embla__container {
+        display: flex;
+        touch-action: pan-y pinch-zoom;
+        margin-left: calc(3rem * -1);
+      }
+      .embla__slide {
+        transform: translate3d(0, 0, 0);
+        flex: 0 0 100%;
+        min-width: 0;
+        padding-left: 3rem;
+        /* background: yellow; */
+      }
+      .embla__slide__number {
+        box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
+        border-radius: 1.8rem;
+        font-size: 4rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: var(--slide-height);
+        user-select: none;
+      }
+      .embla__controls {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        gap: 1.2rem;
+        margin-top: 1.8rem;
+      }
+      .embla__buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3.6rem;
+        align-items: center;
+      }
+      [disabled="disabled"] {
+        opacity: 0.5;
+      }
+      .embla__button {
+        -webkit-tap-highlight-color: rgba(
+          var(--text-high-contrast-rgb-value),
+          0.5
+        );
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: transparent;
+        touch-action: manipulation;
+        display: inline-flex;
+        text-decoration: none;
+        cursor: pointer;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
+        width: 3.6rem;
+        height: 3.6rem;
+        z-index: 1;
+        border-radius: 50%;
+        color: var(--text-body);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .embla__button:disabled {
+        color: var(--detail-high-contrast);
+      }
+      .embla__button__svg {
+        width: 35%;
+        height: 35%;
+      }
+      .header {
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+        padding: 4rem 2rem 2rem 2rem;
+        margin: 0;
+      }
+      .slide-image {
+        max-height: 100vh;
+        max-width: calc(100vw - 30px);
+      }
+      .b {
+        fill: #0389ce;
+      }
+      map {
+        background-color: #0389ce;
+      }
+      map area {
+        background-color: #0389ce;
+      }
+    </style>
+    <!-- <header>
+      <h1 class="header">Embla Carousel Generator Vanilla</h1>
+    </header> -->
+
+    <section class="embla">
+      <div class="embla__viewport">
+        <div class="embla__container">
+          <div class="embla__slide">
+            <div class="embla__slide__number">
+              <img
+                class="slide-image"
+                src="./LH_LookBook/LB_slide1.png"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="embla__slide">
+            <div class="embla__slide__number">
+              <img
+                class="slide-image"
+                src="./LH_LookBook/LB_slide2.gif"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="embla__slide">
+            <div class="embla__slide__number">
+              <img
+                class="slide-image"
+                src="./LH_LookBook/LB_slide3.png"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="embla__slide">
+            <div class="embla__slide__number">
+              <img
+                class="slide-image"
+                src="./LH_LookBook/LB_slide4.gif"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="embla__slide">
+            <div class="embla__slide__number">
+              <img
+                class="slide-image"
+                src="./LH_LookBook/LB_slide5.png"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="embla__slide">
+            <div class="embla__slide__number">
+              <img
+                class="slide-image"
+                src="./LH_LookBook/LB_slide6.png"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="embla__slide">
+            <div class="embla__slide__number" style="position: relative">
+              <img
+                class="slide-image"
+                src="./LH_LookBook/LB_slide7.png"
+                alt=""
+                usemap="#workmap"
+              />
+              <!-- <map name="workmap">
+                <area shape="rect" coords="494,1200,551,1257" alt="Radiance II" target="_blank" href="https://www.youtube.com/watch?v=IPOw-VeHZg">
+                <area shape="rect" coords="290,172,333,250" alt="Phone" target="_blank" href="phone.htm">
+                <area shape="circle" coords="337,300,44" alt="Coffee" target="_blank" href="coffee.htm">
+              </map> -->
+              <a
+                href="https://www.youtube.com/watch?v=IPOw-VeHZgQ"
+                target="_blank"
+                class="radiance"
+                style="position: relative"
+                ><div
+                  style="
+                    position: absolute;
+                    display: block;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-195%, -225%);
+                    width: 14vw;
+                    height: 2vw;
+                    /* background-color: rgba(253, 0, 0, 0.2); */
+                  "
+                ></div
+              ></a>
+              <a
+                href="https://www.youtube.com/watch?v=WPApiFhKFsg"
+                target="_blank"
+                class="souvlaki"
+                style="position: relative"
+                ><div
+                  style="
+                    position: absolute;
+                    display: block;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-170%, 185%);
+                    width: 12vw;
+                    height: 2vw;
+                    /* background-color: rgba(170, 251, 30, 0.739); */
+                  "
+                ></div
+              ></a>
+              <a
+                href="https://www.youtube.com/watch?v=WPApiFhKFsg"
+                target="_blank"
+                class="souvlaki"
+                style="position: relative"
+                ><div
+                  style="
+                    position: absolute;
+                    display: block;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-555%, 295%);
+                    width: 14.5vw;
+                    height: 2vw;
+                    /* background-color: rgba(170, 251, 30, 0.739); */
+                  "
+                ></div
+              ></a>
+              <a
+                href="https://www.youtube.com/watch?v=DwrZl7ySim4"
+                target="_blank"
+                class="atlas"
+                style="position: relative"
+                ><div
+                  style="
+                    position: absolute;
+                    display: block;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-500%, 395%);
+                    width: 9vw;
+                    height: 2vw;
+                    /* background-color: rgba(251, 30, 192, 0.739); */
+                  "
+                ></div
+              ></a>
+            </div>
+          </div>
+          <div class="embla__slide">
+            <div class="embla__slide__number">
+              <img
+                class="slide-image"
+                src="./LH_LookBook/LB_slide8.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="embla__controls">
+        <div class="embla__buttons">
+          <button class="embla__button embla__button--prev" type="button">
+            <svg
+              id="a"
+              xmlns="http://www.w3.org/2000/svg"
+              width="200.29"
+              height="116.36"
+              viewBox="0 0 200.29 116.36"
+            >
+              <path
+                class="b"
+                d="M29.66,45.25v1.42l54.42,30.14v15.11L16.06,51.81v-11.71L84.08,0v15.11l-54.42,30.14Z"
+              />
+              <path
+                class="b"
+                d="M129.81,45.25v1.42l54.42,30.14v15.11l-68.03-40.1v-11.71L184.23,0v15.11l-54.42,30.14Z"
+              />
+              <path class="b" d="M0,116.36v-7.91h200.29v7.91H0Z" />
+            </svg>
+          </button>
+
+          <button class="embla__button embla__button--next" type="button">
+            <svg
+              id="a"
+              xmlns="http://www.w3.org/2000/svg"
+              width="200.29"
+              height="116.36"
+              viewBox="0 0 200.29 116.36"
+            >
+              <path
+                class="b"
+                d="M16.06,15.11V0l68.03,40.1v11.71L16.06,91.92v-15.11l54.34-30.14v-1.42L16.06,15.11Z"
+              />
+              <path
+                class="b"
+                d="M116.2,15.11V0l68.03,40.1v11.71l-68.03,40.1v-15.11l54.34-30.14v-1.42l-54.34-30.14Z"
+              />
+              <path class="b" d="M0,116.36v-7.91h200.29v7.91H0Z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <noscript> You need to enable JavaScript to run this app. </noscript>
+    <script type="text/JavaScript">
+
+        const addTogglePrevNextBtnsActive = (emblaApi, prevBtn, nextBtn) => {
+          const togglePrevNextBtnsState = () => {
+            if (emblaApi.canScrollPrev()) prevBtn.removeAttribute('disabled')
+            else prevBtn.setAttribute('disabled', 'disabled')
+
+            if (emblaApi.canScrollNext()) nextBtn.removeAttribute('disabled')
+            else nextBtn.setAttribute('disabled', 'disabled')
+          }
+
+          emblaApi
+            .on('select', togglePrevNextBtnsState)
+            .on('init', togglePrevNextBtnsState)
+            .on('reInit', togglePrevNextBtnsState)
+
+          return () => {
+            prevBtn.removeAttribute('disabled')
+            nextBtn.removeAttribute('disabled')
+          }
+        }
+
+      const addPrevNextBtnsClickHandlers = (emblaApi, prevBtn, nextBtn) => {
+          const scrollPrev = () => {
+            emblaApi.scrollPrev()
+          }
+          const scrollNext = () => {
+            emblaApi.scrollNext()
+          }
+          prevBtn.addEventListener('click', scrollPrev, false)
+          nextBtn.addEventListener('click', scrollNext, false)
+
+          const removeTogglePrevNextBtnsActive = addTogglePrevNextBtnsActive(
+            emblaApi,
+            prevBtn,
+            nextBtn
+          )
+
+          return () => {
+            removeTogglePrevNextBtnsActive()
+            prevBtn.removeEventListener('click', scrollPrev, false)
+            nextBtn.removeEventListener('click', scrollNext, false)
+          }
+        }
+
+
+        // import EmblaCarousel from 'embla-carousel'
+        // import { addPrevNextBtnsClickHandlers } from './EmblaCarouselArrowButtons'
+        // import '../css/base.css'
+        // import '../css/sandbox.css'
+        // import '../css/embla.css'
+
+        const OPTIONS = {}
+
+        const emblaNode = document.querySelector('.embla')
+        const viewportNode = emblaNode.querySelector('.embla__viewport')
+        const prevBtnNode = emblaNode.querySelector('.embla__button--prev')
+        const nextBtnNode = emblaNode.querySelector('.embla__button--next')
+
+        const emblaApi = EmblaCarousel(viewportNode, OPTIONS)
+
+        const removePrevNextBtnsClickHandlers = addPrevNextBtnsClickHandlers(
+          emblaApi,
+          prevBtnNode,
+          nextBtnNode
+        )
+
+        emblaApi.on('destroy', removePrevNextBtnsClickHandlers)
+    </script>
+    <script type="text/JavaScript">
+            /*
+      * rwdImageMaps jQuery plugin v1.6
+      *
+      * Allows image maps to be used in a responsive design by recalculating the area coordinates to match the actual image size on load and window.resize
+      *
+      * Copyright (c) 2016 Matt Stow
+      * https://github.com/stowball/jQuery-rwdImageMaps
+      * http://mattstow.com
+      * Licensed under the MIT license
+      */
+      ;(function(a){a.fn.rwdImageMaps=function(){var c=this;var b=function(){c.each(function(){if(typeof(a(this).attr("usemap"))=="undefined"){return}var e=this,d=a(e);a("<img />").on('load',function(){var g="width",m="height",n=d.attr(g),j=d.attr(m);if(!n||!j){var o=new Image();o.src=d.attr("src");if(!n){n=o.width}if(!j){j=o.height}}var f=d.width()/100,k=d.height()/100,i=d.attr("usemap").replace("#",""),l="coords";a('map[name="'+i+'"]').find("area").each(function(){var r=a(this);if(!r.data(l)){r.data(l,r.attr(l))}var q=r.data(l).split(","),p=new Array(q.length);for(var h=0;h<p.length;++h){if(h%2===0){p[h]=parseInt(((q[h]/n)*100)*f)}else{p[h]=parseInt(((q[h]/j)*100)*k)}}r.attr(l,p.toString())})}).attr("src",d.attr("src"))})};a(window).resize(b).trigger("resize");return this}})(jQuery);
+    </script>
+  </body>
+</html>
